@@ -1,0 +1,141 @@
+{
+    "parameters": {
+        "allowedLocations": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of locations that can be specified when deploying resources",
+                "strongType": "location",
+                "displayName": "Allowed locations"
+            }
+        },
+        "allowedServices": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of Resource Types that are allowed.",
+                "strongType": "resourceTypes",
+                "displayName": "Allowed resources"
+            }
+        },
+        "disallowedActions": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of acctions that are not allowed in the resource group",
+                "displayName": "Disallowed actions"
+            }
+        },
+        "allowedAppServicePlanSkus": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of allowed App Service Plan SKUs",
+                "displayName": "Allowed App Service Plan SKUs"
+            }
+        },
+        "allowedAppServicePlanCapacities": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of allowed App Service Plan Capacities",
+                "displayName": "Allowed App Service Plan Capacities"
+            }
+        }
+    },
+    "displayName": "Allowed locations, services",
+    "description": "This policy restrict the allowed locations, services, actions, and SKUs.",
+    "policyRule": {
+        "if": {
+            "anyOf": [
+                {
+                    "not": {
+                        "field": "type",
+                        "in": "[parameters('allowedServices')]"
+                    }
+                },
+                {
+                    "not": {
+                        "field": "location",
+                        "in": "[parameters('allowedLocations')]"
+                    }
+                },
+                {
+                    "source": "action",
+                    "in": "[parameters('disallowedActions')]"
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Web/serverfarms"
+                        },
+                        {
+                            "anyOf": [
+                                {
+                                    "not": {
+                                        "field": "Microsoft.Web/serverfarms/sku.name",
+                                        "in": "[parameters('allowedAppServicePlanSkus')]"
+                                    }
+                                },
+                                {
+                                    "not": {
+                                        "field": "Microsoft.Web/serverfarms/sku.capacity",
+                                        "in": "[parameters('allowedAppServicePlanCapacities')]"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters_values": {
+        "allowedLocations": {
+            "value": [
+                "{RGLocation}",
+                "southcentralus"
+            ]
+        },
+        "allowedServices": {
+            "value": [
+                "Microsoft.Web/serverfarms",
+                "Microsoft.Web/sites",
+                "Microsoft.insights/calculatebaseline",
+                "Microsoft.insights/baseline",
+                "Microsoft.insights/activityLogAlerts",
+                "Microsoft.insights/metrics",
+                "Microsoft.insights/eventCategories",
+                "Microsoft.insights/logDefinitions",
+                "Microsoft.insights/extendedDiagnosticSettings",
+                "Microsoft.insights/diagnosticSettingsCategories",
+                "Microsoft.insights/diagnosticSettings",
+                "Microsoft.insights/operations",
+                "Microsoft.insights/locations",
+                "Microsoft.insights/eventtypes",
+                "Microsoft.insights/autoscalesettings",
+                "Microsoft.insights/alertrules",
+                "Microsoft.insights/metricalerts",
+                "Microsoft.insights/logprofiles",
+                "Microsoft.insights/listMigrationdate",
+                "Microsoft.insights/components",
+                "Microsoft.insights/scheduledqueryrules"
+            ]
+        },
+        "disallowedActions": {
+            "value": [
+                "Microsoft.DataLakeStore/locations/checkNameAvailability/action",
+                "Microsoft.DataLakeAnalytics/locations/checkNameAvailability/action"
+            ]
+        },
+        "allowedAppServicePlanSkus": {
+            "value": [
+                "S1"
+            ]
+        },
+        "allowedAppServicePlanCapacities": {
+            "value": [
+                "1"
+            ]
+        }
+    }
+}
