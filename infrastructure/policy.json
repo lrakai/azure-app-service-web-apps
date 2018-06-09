@@ -93,7 +93,7 @@
         "allowedLocations": {
             "value": [
                 "{RGLocation}",
-                "southcentralus"
+                "eastus"
             ]
         },
         "allowedServices": {
@@ -123,8 +123,18 @@
         },
         "disallowedActions": {
             "value": [
-                "Microsoft.DataLakeStore/locations/checkNameAvailability/action",
-                "Microsoft.DataLakeAnalytics/locations/checkNameAvailability/action"
+                "Microsoft.Insights/AutoscaleSettings/Write",
+                "Microsoft.Insights/MetricAlerts/Write",
+                "Microsoft.Insights/AlertRules/Write",
+                "Microsoft.Insights/ScheduledQueryRules/Write",
+                "Microsoft.Insights/LogProfiles/Write",
+                "Microsoft.Insights/Components/Write",
+                "Microsoft.Insights/Components/WorkItemConfigs/Write",
+                "Microsoft.Insights/Components/ProactiveDetectionConfigs/Write",
+                "Microsoft.Insights/Components/PricingPlans/Write",
+                "Microsoft.Insights/ActivityLogAlerts/Write",
+                "Microsoft.Insights/Webtests/Write",
+                "Microsoft.Insights/ExtendedDiagnosticSettings/Write"
             ]
         },
         "allowedAppServicePlanSkus": {
