@@ -29,13 +29,6 @@
                 "description": "The list of allowed App Service Plan SKUs",
                 "displayName": "Allowed App Service Plan SKUs"
             }
-        },
-        "allowedAppServicePlanCapacities": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of allowed App Service Plan Capacities",
-                "displayName": "Allowed App Service Plan Capacities"
-            }
         }
     },
     "displayName": "Allowed locations, services",
@@ -71,12 +64,6 @@
                                     "not": {
                                         "field": "Microsoft.Web/serverfarms/sku.name",
                                         "in": "[parameters('allowedAppServicePlanSkus')]"
-                                    }
-                                },
-                                {
-                                    "not": {
-                                        "field": "Microsoft.Web/serverfarms/sku.capacity",
-                                        "in": "[parameters('allowedAppServicePlanCapacities')]"
                                     }
                                 }
                             ]
@@ -140,11 +127,6 @@
         "allowedAppServicePlanSkus": {
             "value": [
                 "S1"
-            ]
-        },
-        "allowedAppServicePlanCapacities": {
-            "value": [
-                "1"
             ]
         }
     }
