@@ -87,6 +87,7 @@
             "value": [
                 "Microsoft.Web/serverfarms",
                 "Microsoft.Web/sites",
+                "Microsoft.Web/sites/slots",
                 "Microsoft.insights/calculatebaseline",
                 "Microsoft.insights/baseline",
                 "Microsoft.insights/activityLogAlerts",
