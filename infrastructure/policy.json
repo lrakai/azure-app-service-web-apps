@@ -19,7 +19,7 @@
         "disallowedActions": {
             "type": "array",
             "metadata": {
-                "description": "The list of acctions that are not allowed in the resource group",
+                "description": "The list of actions that are not allowed in the resource group",
                 "displayName": "Disallowed actions"
             }
         },
